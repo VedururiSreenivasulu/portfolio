@@ -23,9 +23,21 @@ function toggleTheme() {
 // Load saved theme
 function loadTheme() {
     const savedTheme = localStorage.getItem('theme');
+    
+    // Default to dark on first visit
+    if (!savedTheme) {
+        document.body.setAttribute('data-theme', 'dark');
+        themeIcon.className = 'fas fa-sun';
+        localStorage.setItem('theme', 'dark');
+        return;
+    }
+
     if (savedTheme === 'dark') {
         document.body.setAttribute('data-theme', 'dark');
         themeIcon.className = 'fas fa-sun';
+    } else {
+        document.body.removeAttribute('data-theme');
+        themeIcon.className = 'fas fa-moon';
     }
 }
 
@@ -713,4 +725,5 @@ if (certCard) {
   certCard.onclick = function(e) {
     showCertificateTypeModal();
   };
+
 } 
